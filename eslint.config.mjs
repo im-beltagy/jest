@@ -1,11 +1,12 @@
 import globals from "globals";
+import { parser } from "typescript-eslint";
 import perfectionist from "eslint-plugin-perfectionist";
 import unusedImports from "eslint-plugin-unused-imports";
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   { files: ["app/**/*.{js,mjs,cjs,ts}"] },
-  { languageOptions: { globals: globals.browser } },
+  { languageOptions: { globals: globals.browser, parser } },
   {
     plugins: {
       perfectionist,
