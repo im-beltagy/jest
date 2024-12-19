@@ -64,3 +64,29 @@ export function insertionSort(
     ? arr
     : insertionSort(arr, order, rightSortedIndex + 1);
 }
+
+export function quickSort(
+  arr: number[],
+  order: "asc" | "desc" = "asc"
+): number[] {
+  const pivot = arr[arr.length - 1];
+  let left: number[] = [];
+  let right: number[] = [];
+
+  function moveElement(el: number) {
+    if (order === "asc") {
+      (el > pivot ? right : left).push(el);
+    } else {
+      (el < pivot ? right : left).push(el);
+    }
+  }
+
+  for (let i = 0; i < arr.length - 1; i++) {
+    moveElement(arr[i]);
+  }
+
+  if (left.length > 1) left = quickSort(left, order);
+  if (right.length > 1) right = quickSort(right, order);
+
+  return [...left, pivot, ...right];
+}
