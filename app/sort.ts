@@ -90,3 +90,30 @@ export function quickSort(
 
   return [...left, pivot, ...right];
 }
+
+export function mergeSort(
+  arr: number[],
+  order: "asc" | "desc" = "asc"
+): number[] {
+  if (arr.length <= 1) return arr;
+
+  function merge(...[a1, a2]: [number[], number[]]) {
+    const sorted: number[] = [];
+
+    while (a1.length && a2.length) {
+      if (order === "asc" ? a1[0] < a2[0] : a1[0] > a2[0]) {
+        sorted.push(a1.shift());
+      } else {
+        sorted.push(a2.shift());
+      }
+    }
+
+    return [...sorted, ...a1, ...a2];
+  }
+
+  const centerIndex = Math.floor(arr.length / 2);
+  return merge(
+    mergeSort(arr.slice(0, centerIndex), order),
+    mergeSort(arr.slice(centerIndex), order)
+  );
+}

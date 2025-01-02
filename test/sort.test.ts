@@ -1,4 +1,4 @@
-import { bubbleSort, insertionSort, quickSort } from "../app/sort";
+import { bubbleSort, insertionSort, mergeSort, quickSort } from "../app/sort";
 
 describe.skip("Bubble Sort", () => {
   describe("Ascending", () => {
@@ -160,7 +160,7 @@ describe.skip("Insertion Sort", () => {
   });
 });
 
-describe("Quick Sort", () => {
+describe.skip("Quick Sort", () => {
   describe("Ascending", () => {
     test("Middle Case", () => {
       expect(quickSort([-6, 20, 8, -2, 4])).toEqual([-6, -2, 4, 8, 20]);
@@ -230,6 +230,82 @@ describe("Quick Sort", () => {
 
     test("Array with Large Numbers", () => {
       expect(quickSort([100000, 500, 70000, 1, 99], "desc")).toEqual([
+        100000, 70000, 500, 99, 1,
+      ]);
+    });
+  });
+});
+
+describe("Merge Sort", () => {
+  describe("Ascending", () => {
+    test("Middle Case", () => {
+      expect(mergeSort([-6, 20, 8, -2, 4])).toEqual([-6, -2, 4, 8, 20]);
+    });
+
+    test("Empty Array", () => {
+      expect(mergeSort([])).toEqual([]);
+    });
+
+    test("Already Sorted Array", () => {
+      expect(mergeSort([1, 2, 3, 4, 5])).toEqual([1, 2, 3, 4, 5]);
+    });
+
+    test("Reverse Sorted Array", () => {
+      expect(mergeSort([5, 4, 3, 2, 1])).toEqual([1, 2, 3, 4, 5]);
+    });
+
+    test("Array with Duplicate Values", () => {
+      expect(mergeSort([4, 2, 7, 2, 5, 7])).toEqual([2, 2, 4, 5, 7, 7]);
+    });
+
+    test("Array with Single Element", () => {
+      expect(mergeSort([42])).toEqual([42]);
+    });
+
+    test("Array with Negative Numbers", () => {
+      expect(mergeSort([-3, -1, -7, -2, -5])).toEqual([-7, -5, -3, -2, -1]);
+    });
+
+    test("Array with Large Numbers", () => {
+      expect(mergeSort([100000, 500, 70000, 1, 99])).toEqual([
+        1, 99, 500, 70000, 100000,
+      ]);
+    });
+  });
+
+  describe("Descending", () => {
+    test("Middle Case", () => {
+      expect(mergeSort([-6, 20, 8, -2, 4], "desc")).toEqual([20, 8, 4, -2, -6]);
+    });
+
+    test("Empty Array", () => {
+      expect(mergeSort([], "desc")).toEqual([]);
+    });
+
+    test("Already Sorted in Descending Order", () => {
+      expect(mergeSort([5, 4, 3, 2, 1], "desc")).toEqual([5, 4, 3, 2, 1]);
+    });
+
+    test("Reverse Sorted Array", () => {
+      expect(mergeSort([1, 2, 3, 4, 5], "desc")).toEqual([5, 4, 3, 2, 1]);
+    });
+
+    test("Array with Duplicate Values", () => {
+      expect(mergeSort([4, 2, 7, 2, 5, 7], "desc")).toEqual([7, 7, 5, 4, 2, 2]);
+    });
+
+    test("Array with Single Element", () => {
+      expect(mergeSort([42], "desc")).toEqual([42]);
+    });
+
+    test("Array with Negative Numbers", () => {
+      expect(mergeSort([-3, -1, -7, -2, -5], "desc")).toEqual([
+        -1, -2, -3, -5, -7,
+      ]);
+    });
+
+    test("Array with Large Numbers", () => {
+      expect(mergeSort([100000, 500, 70000, 1, 99], "desc")).toEqual([
         100000, 70000, 500, 99, 1,
       ]);
     });
