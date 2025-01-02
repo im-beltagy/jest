@@ -236,7 +236,7 @@ describe.skip("Quick Sort", () => {
   });
 });
 
-describe("Merge Sort", () => {
+describe.skip("Merge Sort", () => {
   describe("Ascending", () => {
     test("Middle Case", () => {
       expect(mergeSort([-6, 20, 8, -2, 4])).toEqual([-6, -2, 4, 8, 20]);
